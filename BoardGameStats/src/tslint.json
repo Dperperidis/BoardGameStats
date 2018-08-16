@@ -8,10 +8,15 @@
             "camelCase"
         ],
         "component-selector": [
+            "disable-next-line",
             true,
             "element",
             "app",
             "kebab-case"
+        ], 
+         "quotemark": [
+            false
         ]
+
     }
 }
