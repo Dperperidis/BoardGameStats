@@ -17,13 +17,13 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form class="form my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Username" required name="username">
+          <form class="form my-2 my-lg-0" #loginForm="ngForm" (ngSubmit)="login()">
+            <input class="form-control mr-sm-2" type="text" placeholder="Username"  name="username" required [(ngModel)]="player.username">
             <Br>
-            <input class="form-control mr-sm-2" type="password" placeholder="Password" required name="password">
+            <input class="form-control mr-sm-2" type="password" placeholder="Password" required name="password" [(ngModel)]="player.password">
 
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Log In</button>
+              <button [disabled]="!loginForm.valid" type="submit" class="btn btn-primary">Log In</button>
             </div>
           </form>
         </div>

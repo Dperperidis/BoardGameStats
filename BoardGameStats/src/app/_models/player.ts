@@ -5,7 +5,4 @@ export interface Player {
     age: number;
     gender: string;
     lastActive: Date;
-    photoUrl: string;
-    area: string;
-    totalWins: number;
 }

@@ -1,4 +1,4 @@
-<form [formGroup]="registerForm" class="container mt-5 col-md-4">
+<form [formGroup]="registerForm" (ngSubmit)="register()" class="container mt-5 col-md-4">
     <h2 class="text-center text-primary">Sign Up</h2>
     <hr>
     <div class="form-group">

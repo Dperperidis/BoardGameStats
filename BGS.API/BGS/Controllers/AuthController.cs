@@ -1,4 +1,5 @@
-﻿using BGS.Data;
+﻿using AutoMapper;
+using BGS.Data;
 using BGS.Dtos;
 using BGS.models;
 using Microsoft.AspNetCore.Mvc;
@@ -20,10 +21,13 @@ namespace BGS.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _repo;
-        private readonly IConfiguration _config;
+        private readonly IMapper _mapper;
+        public IConfiguration _config { get; }
 
-        public AuthController(IAuthRepository repo, IConfiguration config)
+
+        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
         {
+            _mapper = mapper;
             _repo = repo;
             _config = config;
         }
@@ -39,14 +43,14 @@ namespace BGS.Controllers
             if (await _repo.PlayerExists(playerForRegisterDto.Username))
                 return BadRequest("Username already Exists");
 
-            var playerToCreate = new Player
-            {
-                Username = playerForRegisterDto.Username
-            };
+            var playerToCreate = _mapper.Map<Player>(playerForRegisterDto);
 
             var createdPlayer = await _repo.Register(playerToCreate, playerForRegisterDto.Password);
 
-            return StatusCode(201);
+            var playerToReturn = _mapper.Map<PlayerForDetailedDto>(createdPlayer);
+
+
+            return Ok(201);
         }
 
         [HttpPost("login")]
