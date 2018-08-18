@@ -18,23 +18,35 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
 
-  login(player: any) {
-    return this.http.post(this.baseUrl + "login", player).pipe(
+
+  login(model: any) {
+    return this.http
+    .post(this.baseUrl + "login", model)
+    .pipe(
       map((response: any) => {
-        const user = response;
-        if (user) {
-          localStorage.setItem("token", user.token);
+        const player = response;
+        if (player) {
+          localStorage.setItem("token", player.token);
           localStorage.setItem("player", JSON.stringify(player.player));
           this.decodedToken = this.jwtHelper.decodeToken(player.token);
+          console.log(this.decodedToken);
           this.currentPlayer = player.player;
         }
       })
     );
   }
 
+  // login(player: Player) {
+  //   return this.http.post(this.baseUrl + "login", player);
+  // }
 
 
   register(player: Player) {
     return this.http.post(this.baseUrl + "register", player);
+  }
+
+  loggedIn() {
+    const token = localStorage.getItem("token");
+    return !this.jwtHelper.isTokenExpired(token);
   }
 }

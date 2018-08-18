@@ -4,6 +4,7 @@ import { FormGroup, Validators, FormBuilder } from '../../../node_modules/@angul
 import { Player } from '../_models/player';
 import { AuthService } from '../_services/auth.service';
 import { Router } from '../../../node_modules/@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'register',
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
   constructor(private fb: FormBuilder, private localeService: BsLocaleService, private router: Router,
-     private authService: AuthService) {
+     private authService: AuthService, private toastr: ToastrService) {
     document.body.style.backgroundImage = 'url(../../../assets/img/regipic.jpg)';
     document.body.style.backgroundAttachment = "fixed";
     document.body.style.backgroundSize = "cover";
@@ -34,8 +35,13 @@ export class RegisterComponent implements OnInit {
   createRegisterForm() {
     this.registerForm = this.fb.group(
       {
-        fullName: ["",
-        [
+        firstname: ["", [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(30)
+        ]
+       ],
+       lastname: ["", [
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(30)
@@ -44,8 +50,7 @@ export class RegisterComponent implements OnInit {
         gender: ["male"],
         username: ["", Validators.required],
         dateOfBirth: [null, Validators.required],
-        password: ["",
-          [
+        password: ["", [
             Validators.required,
             Validators.minLength(4),
             Validators.maxLength(8)
@@ -67,7 +72,15 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       this.player = Object.assign({}, this.registerForm.value);
       this.authService.register(this.player).subscribe(res => {
-        console.log(this.player);
+        this.toastr.success("Register Completed");
+        this.router.navigate(['/main']);
+      }, error => {
+        this.toastr.error('Username already exists');
+      }, () => {
+        this.authService.login(this.player).subscribe(
+          () => {
+            this.router.navigate(["/main"]);
+          });
       });
     }
   }

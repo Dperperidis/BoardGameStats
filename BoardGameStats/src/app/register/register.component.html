@@ -13,14 +13,26 @@
 
     <div class="form-group">
         <input type="text" class="form-control" 
-        placeholder="Full Name"
+        placeholder="First Name"
         pattern="[a-zA-Z ]*"
-        formControlName="fullName" 
-        [ngClass]="{'is-invalid': registerForm.get('fullName').errors && registerForm.get('fullName').touched}">
-        <div class="invalid-feedback">Please type your Full Name</div>
-        <div class="invalid-feedback" *ngIf="registerForm.get('fullName').hasError('minlength') && registerForm.get('fullName').touched">Full Name must be at least 3 characters</div>
-        <div class="invalid-feedback" *ngIf="registerForm.get('fullName').hasError('pattern') && registerForm.get('fullName').touched">Full Name must have only letters</div>
-      <div class="invalid-feedback" *ngIf="registerForm.get('fullName').hasError('maxlength') && registerForm.get('fullName').touched">Full Name cannot exceed 20 characters</div>
+        formControlName="firstname" 
+        [ngClass]="{'is-invalid': registerForm.get('firstname').errors && registerForm.get('firstname').touched}">
+        <div class="invalid-feedback">Please type your First Name</div>
+        <div class="invalid-feedback" *ngIf="registerForm.get('firstname').hasError('minlength') && registerForm.get('firstname').touched">First Name must be at least 3 characters</div>
+        <div class="invalid-feedback" *ngIf="registerForm.get('firstname').hasError('pattern') && registerForm.get('firstname').touched">First Name must have only letters</div>
+      <div class="invalid-feedback" *ngIf="registerForm.get('firstname').hasError('maxlength') && registerForm.get('firstname').touched">First Name cannot exceed 20 characters</div>
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" 
+        placeholder="Last Name"
+        pattern="[a-zA-Z ]*"
+        formControlName="lastname" 
+        [ngClass]="{'is-invalid': registerForm.get('lastname').errors && registerForm.get('lastname').touched}">
+        <div class="invalid-feedback">Please type your Last Name</div>
+        <div class="invalid-feedback" *ngIf="registerForm.get('lastname').hasError('minlength') && registerForm.get('lastname').touched">Last Name must be at least 3 characters</div>
+        <div class="invalid-feedback" *ngIf="registerForm.get('lastname').hasError('pattern') && registerForm.get('lastname').touched">Last Name must have only letters</div>
+      <div class="invalid-feedback" *ngIf="registerForm.get('lastname').hasError('maxlength') && registerForm.get('lastname').touched">Last Name cannot exceed 20 characters</div>
       </div>
     
     <div class="form-group">

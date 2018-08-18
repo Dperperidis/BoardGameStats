@@ -18,12 +18,12 @@
             </button>
           </div>
           <form class="form my-2 my-lg-0" #loginForm="ngForm" (ngSubmit)="login()">
-            <input class="form-control mr-sm-2" type="text" placeholder="Username"  name="username" required [(ngModel)]="player.username">
+            <input class="form-control mr-sm-2" type="text" placeholder="Username"  name="username" required [(ngModel)]="model.username">
             <Br>
-            <input class="form-control mr-sm-2" type="password" placeholder="Password" required name="password" [(ngModel)]="player.password">
+            <input class="form-control mr-sm-2" type="password" placeholder="Password" required name="password" [(ngModel)]="model.password">
 
             <div class="modal-footer">
-              <button [disabled]="!loginForm.valid" type="submit" class="btn btn-primary">Log In</button>
+              <button [disabled]="!loginForm.valid" type="submit" class="btn btn-primary" (click)="modalRef.hide()">Log In</button>
             </div>
           </form>
         </div>

@@ -15,7 +15,9 @@ namespace BGS.Dtos
         [StringLength(12, MinimumLength = 4, ErrorMessage = "You must specify password between 4 and 12 numbers and letters")]
         public string Password { get; set; }
         [Required]
-        public string FullName { get; set; }
+        public string FirstName { get; set; }
+        [Required]
+        public string LastName { get; set; }
         [Required]
         public string Gender { get; set; }
         [Required]
